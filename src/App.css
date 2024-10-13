@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
-*/
-
+/* Main container */
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -14,10 +11,14 @@
   justify-content: center;
   padding: 120px 24px 160px 24px;
   pointer-events: none;
+  background: linear-gradient(to right, #e0f7fa, #cfd8dc);
+  /* Updated background gradient */
+  transition: background-color 1s ease;
+  animation: fadeIn 2s ease-in-out;
 }
 
 .main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #ffffff 100%);
   position: absolute;
   content: "";
   z-index: 2;
@@ -38,14 +39,13 @@
   filter: invert(1);
 }
 
+/* Gradient with hover effect */
 .gradient {
   height: fit-content;
   z-index: 3;
   width: 100%;
   max-width: 640px;
-  background-image: radial-gradient(at 27% 37%,
-      hsla(215, 98%, 61%, 1) 0px,
-      transparent 0%),
+  background-image: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 1) 0px, transparent 0%),
     radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
     radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
     radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
@@ -59,8 +59,14 @@
   filter: blur(100px) saturate(150%);
   top: 80px;
   opacity: 0.15;
+  transition: opacity 0.5s ease-in-out;
 }
 
+.gradient:hover {
+  opacity: 0.3;
+}
+
+/* Responsive design for smaller screens */
 @media screen and (max-width: 640px) {
   .main {
     padding: 0;
@@ -68,29 +74,32 @@
 }
 
 /* Tailwind Styles */
-
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-sm text-white transition-all hover:bg-white hover:text-black;
+  @apply rounded-full border border-black bg-blue-700 py-1.5 px-5 text-sm text-white transition-all hover:bg-blue-500 hover:text-white duration-300 ease-in-out;
+  animation: bounce 2s infinite;
 }
 
 .head_text {
-  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-gray-900 sm:text-6xl text-center;
+  /* Updated to a darker shade */
 }
 
 .orange_gradient {
-  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent;
+  /* More vibrant gradient */
 }
 
 .desc {
-  @apply mt-5 text-lg text-gray-600 sm:text-xl text-center max-w-2xl;
+  @apply mt-5 text-lg text-gray-700 sm:text-xl text-center max-w-2xl;
+  /* Slightly darker text color */
 }
 
 .url_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-md border border-gray-300 bg-blue-50 py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-blue-600 focus:outline-none focus:ring-0;
 }
 
 .submit_btn {
@@ -98,17 +107,34 @@
 }
 
 .link_card {
-  @apply p-3 flex justify-start items-center flex-row bg-white border border-gray-200 gap-3 rounded-lg cursor-pointer;
+  @apply p-3 flex justify-start items-center flex-row bg-white border border-gray-300 gap-3 rounded-lg cursor-pointer transition-transform transform hover:scale-105 duration-300 ease-in-out;
 }
-
-/* .copy_btn {
-  @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199, 199, 199, 0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
-} */
 
 .blue_gradient {
-  @apply font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  @apply font-black bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent;
 }
 
-/* .summary_box {
-  @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199, 199, 199, 0.2)] backdrop-blur p-4;
-} */
+/* Keyframe Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
